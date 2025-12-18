@@ -23,19 +23,3 @@ class ProductAdmin(ModelView, model=Product):
     icon = "fa-solid fa-box"
 
 admin.add_view(ProductAdmin)
-
-@app.get("/hello")
-def hello():
-    return {"message": "Hello FastAPI!"}
-
-@app.get("/")
-def root():
-    return {
-        "message": "Welcome to FastAPI Assignment",
-        "endpoints": {
-            "hello": "/hello",
-            "create_user": "/users (POST)",
-            "get_users": "/users (GET)",
-            "admin_dashboard": "/admin"
-        }
-    }

@@ -1,12 +1,27 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-
 from app.database import get_db
 from app.schemas import UserCreate, UserResponse, UserCreateResponse
 from app.crud import create_user, get_users
 
 router = APIRouter()
+
+@router.get("/hello")
+def hello():
+    return {"message": "Hello FastAPI!"}
+
+@router.get("/")
+def root():
+    return {
+        "message": "Welcome to FastAPI Assignment",
+        "endpoints": {
+            "hello": "/hello",
+            "create_user": "/users (POST)",
+            "get_users": "/users (GET)",
+            "admin_dashboard": "/admin"
+        }
+    }
 
 @router.post("/users", response_model=UserCreateResponse)
 def create_user_endpoint(user: UserCreate, db: Session = Depends(get_db)):
